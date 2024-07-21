@@ -58,7 +58,10 @@ const courseSchema = new mongoose.Schema({
     assignedByName: {
         type: String,
         required: true,
-    } 
+    },
+    comments: {
+        type: String,
+    }
 })
 
 const courseModel = new mongoose.model('Course',courseSchema)

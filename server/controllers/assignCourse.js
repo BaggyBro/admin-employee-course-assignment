@@ -17,7 +17,8 @@ const assignCourse = async (req, res) => {
       duration,
       dueDate,
       completeDate,
-      userName
+      userName,
+      comments
     } = req.body;
 
    const token = req.headers.authorization?.split(' ')[1];
@@ -57,7 +58,8 @@ const assignCourse = async (req, res) => {
       user: userid,
       userName,
       assignedBy: admin._id,
-      assignedByName: admin.name
+      assignedByName: admin.name,
+      comments
     };
 
     const course = new courseModel(payload);

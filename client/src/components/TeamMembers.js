@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FiPlusCircle } from "react-icons/fi";
 import AssignTrainingModal from "../modals/AssignTrainingModal";
+import { LiaCommentDotsSolid } from "react-icons/lia";
+import CommentModal from "../modals/CommentModal";
 
 const TeamMembers = () => {
   const [members, setMembers] = useState([]);
@@ -9,6 +11,8 @@ const TeamMembers = () => {
   const [expandedMemberIds, setExpandedMemberIds] = useState([]);
   const [memberCourses, setMemberCourses] = useState([]);
   const [assignModalVisible, setAssignModalVisible] = useState(false);
+  const [commentModal, setCommentModal] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -59,6 +63,11 @@ const TeamMembers = () => {
     setAssignModalVisible(!assignModalVisible);
   };
 
+  const toggleCommentModal = (course) => {
+    setCommentModal(!commentModal);
+    setSelectedCourse(course);
+  };
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -73,7 +82,7 @@ const TeamMembers = () => {
     <>
       <div className="container mx-auto px-4 py-6">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Team Members</h2>
-        
+
         <div className="mb-4">
           <input
             type="text"
@@ -193,7 +202,11 @@ const TeamMembers = () => {
                                   {course.completeDate || "---"}
                                 </td>
                                 <td className="border-b border-gray-300 px-4 py-2 text-left text-xs">
-                                  {course.comments || "N/A"}
+                                  <LiaCommentDotsSolid
+                                    size={30}
+                                    onClick={() => toggleCommentModal(course)}
+                                    className="cursor-pointer"
+                                  />
                                 </td>
                               </tr>
                             ))}
@@ -220,12 +233,33 @@ const TeamMembers = () => {
 
       {assignModalVisible && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50" onClick={toggleAssignModal}></div>
+          <div
+            className="fixed inset-0 bg-black opacity-50"
+            onClick={toggleAssignModal}
+          ></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-50">
-            <AssignTrainingModal closeModal={toggleAssignModal}/>
+            <AssignTrainingModal closeModal={toggleAssignModal} />
             <button
               className="absolute top-0 right-0 mt-4 mr-4 text-2xl"
               onClick={toggleAssignModal}
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+
+      {commentModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="fixed inset-0 bg-black opacity-50"
+            onClick={toggleCommentModal}
+          ></div>
+          <div className="relative bg-white rounded-lg p-8 shadow-lg z-50">
+            <CommentModal closeModal={toggleCommentModal} course={selectedCourse} />
+            <button
+              className="absolute top-0 right-0 mt-4 mr-4 text-2xl"
+              onClick={toggleCommentModal}
             >
               &times;
             </button>

@@ -53,7 +53,7 @@ const AdminBoard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-altresblue flex items-center p-4">
-        <img src="/ALTRES.png" alt="ALTRES" className="h-10" />
+        <img src="/ALTRES.png" alt="LOGO" className="h-10" />
         <button
           onClick={handleLogout}
           className="ml-auto text-white font-bold bg-red-400 py-2 px-4 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"

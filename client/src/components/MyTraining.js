@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import StatusModal from "../modals/StatusModal";
+import { LiaCommentDotsSolid } from "react-icons/lia";
 
 const MyTraining = () => {
   const [courses, setCourses] = useState([]);
@@ -101,7 +102,7 @@ const MyTraining = () => {
                   {course.completeDate || "---"}
                 </td>
                 <td className="border-b border-gray-300 px-4 py-2 text-left text-xs">
-                  {course.comments || "N/A"}
+                  <LiaCommentDotsSolid size={30}/>
                 </td>
               </tr>
             ))}

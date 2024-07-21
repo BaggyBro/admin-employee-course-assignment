@@ -18,6 +18,7 @@ const AssignTrainingModal = ({ closeModal }) => {
     category: "",
     userName: "",
     dueDate: null,
+    comments: ""
   });
 
   const [members, setMembers] = useState([]);
@@ -213,6 +214,17 @@ const AssignTrainingModal = ({ closeModal }) => {
             type="text"
             name="duration"
             value={formData.duration}
+            className="bg-gray-200 p-2 rounded flex-grow"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="flex gap-2 items-center">
+          <label className="font-bold">Comments:</label>
+          <input
+            type="text"
+            name="comments"
+            value={formData.comments}
             className="bg-gray-200 p-2 rounded flex-grow"
             onChange={handleChange}
           />
